@@ -1,5 +1,5 @@
 #include "Block.h"
-#include "sha256.h"
+#include "../SHA256/sha256.h"
 #include <sstream>
 #include <ctime>
 
