@@ -4,8 +4,8 @@
 
 Blockchain::Blockchain()
 {
-    _chain.emplace_back(Block(0, "Genesis Block"));
-    _difficulty = 2;
+    _chain.emplace_back(Block(0, std::vector<int>()));
+    _difficulty = 5;
 }
 
 void Blockchain::add_block(Block new_block)
@@ -23,4 +23,17 @@ Block Blockchain::_get_last_block() const
 std::vector<Block> Blockchain::get_chain()
 {
     return _chain;
+}
+
+void Blockchain::print_blockchain()
+{
+    for (int i = 0; i < _chain.size(); ++i)
+    {
+        std::cout << "Block " << i << " ";
+        for (int j = 0; j < _chain[i].get_data().size(); ++j)
+        {
+            std::cout << _chain[i].get_data()[j] << " ";
+        }
+        std::cout << std::endl;
+    }
 }

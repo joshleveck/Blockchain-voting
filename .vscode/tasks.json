@@ -1,30 +1,29 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"type": "cppbuild",
-			"label": "C/C++: g++.exe build active file",
-			"command": "C:\\msys64\\msys64\\mingw64\\bin\\g++.exe",
-			"args": [
-				"-fdiagnostics-color=always",
-				"-g",
-				"${fileDirname}/**.cpp",
-				"${fileDirname}/Blockchain/**.cpp",
-				"${fileDirname}/SHA256/**.cpp",
-				"-o",
-				"${fileDirname}\\${fileBasenameNoExtension}.exe"
-			],
-			"options": {
-				"cwd": "${fileDirname}"
-			},
-			"problemMatcher": [
-				"$gcc"
-			],
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"detail": "compiler: C:\\msys64\\msys64\\mingw64\\bin\\g++.exe"
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "cppbuild",
+      "label": "C/C++: g++.exe build active file",
+      "command": "C:\\msys64\\msys64\\mingw64\\bin\\g++.exe",
+      "args": [
+        "-fdiagnostics-color=always",
+        "-g",
+        "${fileDirname}/main.cpp",
+        "${fileDirname}/Blockchain/Block.cpp",
+        "${fileDirname}/Blockchain/Blockchain.cpp",
+        "${fileDirname}/SHA256/sha256.cpp",
+        "-o",
+        "${fileDirname}\\${fileBasenameNoExtension}.exe"
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "compiler: C:\\msys64\\msys64\\mingw64\\bin\\g++.exe"
+    }
+  ]
 }

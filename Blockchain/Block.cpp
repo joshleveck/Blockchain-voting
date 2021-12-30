@@ -1,9 +1,10 @@
 #include "Block.h"
 #include "../SHA256/sha256.h"
 #include <sstream>
+#include <vector>
 #include <ctime>
 
-Block::Block(uint32_t index_in, const std::string &data_in) : _index(index_in), _data(data_in)
+Block::Block(uint32_t index_in, const std::vector<int> &data_in) : _index(index_in), _data(data_in)
 {
     _nonce = -1;
     _time = std::time(nullptr);
@@ -34,19 +35,22 @@ void Block::mine_block(uint32_t difficulty)
         ++_nonce;
         _hash = _calculate_hash();
     }
-
-    std::cout << "Block mined: " << _hash << std::endl;
 }
 
 inline std::string Block::_calculate_hash() const
 {
     std::stringstream ss;
-    ss << _index << _time << _data << _nonce << _prev_hash;
+    ss << _index << _time;
+    for (int i = 0; i < _data.size(); ++i)
+    {
+        ss << _data[i];
+    }
+    ss << _nonce << _prev_hash;
 
     return sha256(ss.str());
 }
 
-std::string Block::get_data()
+std::vector<int> Block::get_data()
 {
     return _data;
 }
