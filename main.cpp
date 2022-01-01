@@ -13,6 +13,7 @@ const char *NAMES[3] = {"Joe Biden",
 //Function declerations
 Blockchain election(const char *names[], int cap);
 int get_vote(const char *names[], int cap);
+void print_results(Blockchain chain, const char *names[], int cap);
 int main();
 
 //Function definitions
@@ -42,6 +43,25 @@ int get_vote(const char *names[], int cap)
     else
     {
         return -1;
+    }
+}
+
+void print_results(Blockchain blockchain, const char *names[], int cap)
+{
+    std::vector<Block> chain = blockchain.get_chain();
+    int *tally = new int[cap]{};
+    for (int i = 0; i < chain.size(); ++i)
+    {
+        std::vector<int> data = chain[i].get_data();
+        for (int j = 0; j < data.size(); ++j)
+        {
+            ++tally[data[j]];
+        }
+    }
+
+    for (int i = 0; i < cap; ++i)
+    {
+        std::cout << names[i] << ": " << tally[i] << std::endl;
     }
 }
 
@@ -87,8 +107,10 @@ Blockchain election(const char *names[], int cap)
                 tmp_votes.push_back(vote);
             }
         }
+        //Rejoin the thread
         t.join();
     }
+    //Adding any leftover votes
     if (tmp_votes.size() != 0)
     {
         std::vector<int> votes = tmp_votes;
@@ -100,5 +122,5 @@ Blockchain election(const char *names[], int cap)
 int main()
 {
     Blockchain chain = election(NAMES, 3);
-    chain.print_blockchain();
+    print_results(chain, NAMES, 3);
 }
